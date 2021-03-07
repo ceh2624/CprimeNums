@@ -15,7 +15,7 @@ int main(void)
 	max = ceil(sqrt(top));
 	
 	printf("This will run through %d, the floor of the square root of %0.0f.\n", max, top);
-	int *nums = malloc(topInt * sizeof(int));
+	int *nums = malloc(topInt * sizeof(int)); /*Prevents the dreded SEGMENTATION FAULT*/
 	t = clock();
 	for(num = 0; num <= topInt + 1; num ++)
 	{  /* build the array of numbers*/
@@ -29,9 +29,9 @@ int main(void)
 		chk = zed;
 		do
 		{
-			if(nums[chk] % zed == 0 && nums[chk] != zed)
-				nums[chk] = 0;
-			chk++;
+		   if(nums[chk] % zed == 0 && nums[chk] != zed) /*set composit numbers to zero*/
+		      nums[chk] = 0;
+		   chk++;
 		}while(chk <= top);
 	}
 	t = clock() - t;
@@ -40,7 +40,7 @@ int main(void)
 		if(nums[x] != 0)
 			printf("%d is prime\n", nums[x]);
 	}
-	free(nums);
+	free(nums); /*Free up that memory space*/
 	double timeTaken = ((double)t) / CLOCKS_PER_SEC;
 	printf("That took %0.2f seconds\n", timeTaken); 
 }
